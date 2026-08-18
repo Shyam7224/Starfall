@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Starfall — catch the stars</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div id="game-wrap">
+
+    <!-- HUD -->
+    <div id="hud">
+      <div class="hud-item">
+        <span class="hud-label">Score</span>
+        <span class="hud-value" id="score">0</span>
+      </div>
+      <div class="hud-item" id="lives-wrap">
+        <span class="hud-label">Lives</span>
+        <span class="hud-value" id="lives">❤❤❤</span>
+      </div>
+      <div class="hud-item">
+        <span class="hud-label">Best</span>
+        <span class="hud-value" id="highscore">0</span>
+      </div>
+      <div class="hud-buttons">
+        <button id="menu-btn" aria-label="Main Menu" class="hud-btn">☰</button>
+        <button id="pause-btn" aria-label="Pause" class="hud-btn">II</button>
+      </div>
+    </div>
+
+    <!-- Canvas -->
+    <canvas id="game-canvas" width="800" height="600"></canvas>
+
+    <!-- Main menu -->
+    <div id="menu-overlay" class="overlay">
+      <div class="overlay-panel">
+        <h1 class="title">STARFALL</h1>
+        <p class="subtitle">Catch the falling stars. Dodge the comets.</p>
+
+        <div class="menu-actions">
+          <button id="start-btn" class="primary-btn">Play</button>
+          <button id="howto-btn" class="secondary-btn">How to Play</button>
+        </div>
+
+        <div class="save-actions">
+          <button id="export-save-btn" class="secondary-btn save-btn">💾 Export Save</button>
+          <button id="import-save-btn" class="secondary-btn save-btn">📂 Import Save</button>
+          <input type="file" id="import-save-input" accept=".json" style="display:none">
+        </div>
+
+        <div class="difficulty-picker">
+          <span class="hud-label">Difficulty</span>
+          <div class="difficulty-row" id="difficulty-row">
+            <button class="diff-btn" data-difficulty="easy">Easy</button>
+            <button class="diff-btn" data-difficulty="normal">Normal</button>
+            <button class="diff-btn" data-difficulty="hard">Hard</button>
+          </div>
+        </div>
+        <p class="save-hint">💡 Export your save to keep it forever</p>
+      </div>
+    </div>
+
+    <!-- How to play -->
+    <div id="howto-overlay" class="overlay hidden">
+      <div class="overlay-panel">
+        <h2 class="title-sm">How to Play</h2>
+        <div class="legend">
+          <div class="legend-row"><span class="dot star-dot"></span> Star &nbsp;→&nbsp; +10</div>
+          <div class="legend-row"><span class="dot gold-dot"></span> Gold (Diamond) &nbsp;→&nbsp; +50</div>
+          <div class="legend-row"><span class="dot bomb-dot"></span> Comet &nbsp;→&nbsp; −1 life</div>
+          <div class="legend-row" style="margin-top:6px;font-size:11px;color:var(--ink-dim);">⭐ Shape tells you the
+            value — colorblind friendly!</div>
+        </div>
+        <p class="controls-hint">← → or A / D to move · drag on mobile · P to pause</p>
+        <button id="howto-back-btn" class="primary-btn">Back</button>
+      </div>
+    </div>
+
+    <!-- Pause overlay -->
+    <div id="pause-overlay" class="overlay hidden">
+      <div class="overlay-panel">
+        <h2 class="title-sm">Paused</h2>
+        <div class="menu-actions">
+          <button id="resume-btn" class="primary-btn">Resume</button>
+          <button id="pause-menu-btn" class="secondary-btn">Main Menu</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game over overlay -->
+    <div id="gameover-overlay" class="overlay hidden">
+      <div class="overlay-panel">
+        <h2 class="title-sm" id="gameover-heading">Game Over</h2>
+
+        <!-- Run Stats -->
+        <div id="run-stats" class="run-stats">
+          <div class="stat-row"><span>Stars caught</span><span id="stat-caught">0</span></div>
+          <div class="stat-row"><span>Stars missed</span><span id="stat-missed">0</span></div>
+          <div class="stat-row"><span>Bombs dodged</span><span id="stat-dodged">0</span></div>
+          <div class="stat-row stat-grade"><span>Grade</span><span id="stat-grade">-</span></div>
+        </div>
+
+        <p class="final-score">Score: <span id="final-score">0</span></p>
+        <p class="best-line" id="new-best-line">New best!</p>
+        <div class="menu-actions">
+          <button id="restart-btn" class="primary-btn">Play Again</button>
+          <button id="gameover-menu-btn" class="secondary-btn">Main Menu</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="game.js"></script>
+</body>
+
+</html>
